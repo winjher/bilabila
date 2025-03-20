@@ -9,3 +9,19 @@ with st.expander('Data'):
   st.write('**Raw Data**')
   df = pd.read_csv('https://github.com/winjher/bilabila/blob/master/Data/butterfly_data.csv')
   df
+
+st.write('**X**')
+x = df.drop('Species', axis=1)
+x
+
+st.write('**y**')
+y = df.Species
+y
+
+with st.expander('Data visualization'):
+  st.scatter_chart(data=df,x='Wingspan_mm', y='Hindwing',color='Place')
+
+#Data preparations
+with st.sidebar:
+   st.header('Input features')
+   Place=st.selectbox('Place','Lepidoptera')
