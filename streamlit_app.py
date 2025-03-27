@@ -7,7 +7,7 @@ st.info('This is app builds a Machine Learning Model')
 
 with st.expander('Data'):
   st.write('**Raw Data**')
-  df = pd.read_csv('https://github.com/winjher/bilabila/blob/master/Data/butterfly_data.csv')
+  df = pd.read_csv('pages/https://github.com/winjher/bilabila/blob/master/Data/butterfly_data.csv')
   df
 
 st.write('**X**')
