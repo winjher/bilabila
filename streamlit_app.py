@@ -16,7 +16,7 @@ menu_items = [
 # Function to display content for each menu item
 def display_content(item):
     if item == "Home":
-        st.title("Welcome to the Butterfly App")
+        st.title("🦋 Welcome to the Butterfly App")
         st.write("This app provides information about butterflies and their care.")
     elif item == "About":
         st.title("About Butterflies")
