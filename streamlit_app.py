@@ -28,8 +28,8 @@ def display_content(item):
     elif item == "Larval Diseases":
         st.title("Larval Diseases")
         st.write("Learn about common diseases that affect butterfly larvae.")
-        larval_disease_names = ['Baculovirus', 'Gnats Disease', 'Healthy-Larvae_Common_Lime', 'Healthy-Larvae_Golden_Birdwing', 'Tachinid fly']
-        number_of_cases = [120, 80, 200, 220, 50]
+        larval_disease_names = ['Anaphylaxis Infection', 'Gnathostomiasis', 'Nucleopolyhedrosis']
+        number_of_cases = [120, 220, 50]
 
         st.subheader("Disease Cases")
         df_diseases = pd.DataFrame({
