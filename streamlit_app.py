@@ -48,8 +48,8 @@ def display_content(item):
     elif item == "Pupae Defects":
         st.title("Pupae Defects")
         st.write("Discover the different types of defects that can occur in pupae.")
-        pupae_defects_names = ['Ant bites', 'Deformed body', 'Golden Birdwing defects pupae', 'Golden Birdwing healthy pupae', 'Healthy Pupae', 'Old Pupa', 'Overbend', 'Stretch abdomen']
-        number_of_defects = [50, 30, 20, 10, 200, 25, 15, 40]
+        pupae_defects_names = ['Ant bites', 'Deformed body', 'Healthy Pupae', 'Old Pupa', 'Overbend', 'Stretch abdomen']
+        number_of_defects = [50, 30, 200, 25, 15, 40]
 
         st.subheader("Defect Cases")
         df_defects = pd.DataFrame({
