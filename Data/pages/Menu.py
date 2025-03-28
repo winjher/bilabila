@@ -28,8 +28,8 @@ def display_content(item):
     elif item == "Larval Diseases":
         st.title("Larval Diseases")
         st.write("Learn about common diseases that affect butterfly larvae.")
-        larval_disease_names = ['Baculovirus', 'Gnats Disease', 'Healthy-Larvae_Common_Lime', 'Healthy-Larvae_Golden_Birdwing', 'Tachinid fly']
-        number_of_cases = [120, 80, 200, 220, 50]
+        larval_disease_names = ['Anaphylaxis Infection', 'Gnathostomiasis', 'Nucleopolyhedrosis']
+        number_of_cases = [120,220, 50]
 
         st.subheader("Disease Cases")
         df_diseases = pd.DataFrame({
@@ -48,8 +48,8 @@ def display_content(item):
     elif item == "Pupae Defects":
         st.title("Pupae Defects")
         st.write("Discover the different types of defects that can occur in pupae.")
-        pupae_defects_names = ['Ant bites', 'Deformed body', 'Golden Birdwing defects pupae', 'Golden Birdwing healthy pupae', 'Healthy Pupae', 'Old Pupa', 'Overbend', 'Stretch abdomen']
-        number_of_defects = [50, 30, 20, 10, 200, 25, 15, 40]
+        pupae_defects_names = ['Ant bites', 'Deformed body', 'Healthy Pupae', 'Old Pupa', 'Overbend', 'Stretch abdomen']
+        number_of_defects = [50, 30, 200, 25, 15, 40]
 
         st.subheader("Defect Cases")
         df_defects = pd.DataFrame({
