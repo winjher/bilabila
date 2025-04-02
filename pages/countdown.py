@@ -53,8 +53,8 @@ if st.session_state['daily_changes']:
 
     # Save to CSV
     if st.button("Save Schedule to CSV"):
-        changes_df.to_csv("C:/Users/jerwin/Documents/GitHub/bilabila/Data/daily_changes_schedule.csv", index=False)
-        st.success("Schedule saved to 'C:/Users/jerwin/Documents/GitHub/bilabila/Data/daily_changes_schedule.csv'")
+        changes_df.to_csv("https://github.com/winjher/bilabila/tree/master/Data/daily_changes_schedule.csv", index=False)
+        st.success("Schedule saved to 'https://github.com/winjher/bilabila/tree/master/Data/daily_changes_schedule.csv'")
 else:
     st.write("No changes scheduled yet.")
 
