@@ -5,12 +5,36 @@ import seaborn as sns
 
 # Define the navigation menu items
 menu_items = [
-    "Home",
+        "Home",
     "About",
     "Contact",
     "Larval Diseases",
     "Pupae Defects",
     "Butterfly Life Cycle",
+    "Breeders",
+    "Breeders Income",
+    "Butterfly",
+    "Butterfly Data",
+    "Care Management",
+    "Classification",
+    "Classifier",
+    "Classify Diseases",
+    "CNN Classifier",
+    "Countdown",
+    "Defects",
+    "Diseases",
+    "Example",
+    "Hostplants",
+    "Larval Disease",
+    "Life Stages",
+    "Menu",
+    "OpenCV",
+    "Pupae Defects",
+    "Purchasers",
+    "Stages",
+    "Tasks",
+    "Transfer Learning"
+    
 ]
 
 # Function to display content for each menu item
@@ -68,11 +92,29 @@ def display_content(item):
     elif item == "Butterfly Life Cycle":
         st.title("Butterfly Life Cycle")
         st.write("Explore the stages of a butterfly's life cycle.")
-        st.image("https://upload.wikimedia.org/wikipedia/commons/1/19/Life_cycle_of_butterflies.jpg", caption="Butterfly Life Cycle")
-        
+        # st.image("https://upload.wikimedia.org/wikipedia/commons/1/19/Life_cycle_of_butterflies.jpg", caption="Butterfly Life Cycle")
+        life_cycle=['Pupae','Larvae','Eggs','Butterflies']
+        number_of_stages=[250,340,230,500]
+        st.subheader("Life Stages")
+        df_stages = pd.DataFrame({
+            'Stages Type': life_cycle,
+            'Number of Stages': number_of_stages,
+        })
+        with st.expander('Data'):
+            st.write('**Raw Data**')
+            df = pd.read_csv('C:/Users/jerwin/Documents/GitHub/butterfly_photos/data/Stages.csv')
+            df
+        # Plotting
+        st.subheader("Butterfly Life Cycle")
+        fig, ax = plt.subplots()
+        sns.barplot(x='Stages Type', y='Number of Stages', data=df_stages, palette='viridis', ax=ax)
+        plt.xticks(rotation=45)
+        st.pyplot(fig)
 
-# Create the sidebar menu
-st.sidebar.title("Navigation")
+        st.write(df_stages)
+        # Create the sidebar menu
+        st.sidebar.title("Navigation")
+
 selected_item = st.sidebar.selectbox("Choose an option", menu_items)
 
 # Display the content based on the selected item
