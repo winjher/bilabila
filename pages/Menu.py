@@ -3,39 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Define the navigation menu items
-menu_items = [
-        "Home",
-    "About",
-    "Contact",
-    "Larval Diseases",
-    "Pupae Defects",
-    "Butterfly Life Cycle",
-    "Breeders",
-    "Breeders Income",
-    "Butterfly",
-    "Butterfly Data",
-    "Care Management",
-    "Classification",
-    "Classifier",
-    "Classify Diseases",
-    "CNN Classifier",
-    "Countdown",
-    "Defects",
-    "Diseases",
-    "Example",
-    "Hostplants",
-    "Larval Disease",
-    "Life Stages",
-    "Menu",
-    "OpenCV",
-    "Pupae Defects",
-    "Purchasers",
-    "Stages",
-    "Tasks",
-    "Transfer Learning"
-    
-]
 
 # Function to display content for each menu item
 def display_content(item):
@@ -114,6 +81,40 @@ def display_content(item):
         st.write(df_stages)
         # Create the sidebar menu
         st.sidebar.title("Navigation")
+            # Define the navigation menu items
+menu_items = [
+    "Home",
+    "About",
+    "Contact",
+    "Larval Diseases",
+    "Pupae Defects",
+    "Butterfly Life Cycle",
+    "Breeders",
+    "Breeders Income",
+    "Butterfly",
+    "Butterfly Data",
+    "Care Management",
+    "Classification",
+    "Classifier",
+    "Classify Diseases",
+    "CNN Classifier",
+    "Countdown",
+    "Defects",
+    "Diseases",
+    "Example",
+    "Hostplants",
+    "Larval Disease",
+    "Life Stages",
+    "Menu",
+    "OpenCV",
+    "Pupae Defects",
+    "Purchasers",
+    "Stages",
+    "Tasks",
+    "Transfer Learning"
+    
+]
+
 
 selected_item = st.sidebar.selectbox("Choose an option", menu_items)
 
