@@ -67,10 +67,7 @@ def display_content(item):
             'Stages Type': life_cycle,
             'Number of Stages': number_of_stages,
         })
-        with st.expander('Data'):
-            st.write('**Raw Data**')
-            df = pd.read_csv('./butterfly_photos/Data/stages count.csv')
-            df
+       
         # Plotting
         st.subheader("Butterfly Life Cycle")
         fig, ax = plt.subplots()
