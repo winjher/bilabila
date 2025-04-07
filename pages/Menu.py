@@ -69,7 +69,7 @@ def display_content(item):
         })
         with st.expander('Data'):
             st.write('**Raw Data**')
-            df = pd.read_csv('./butterfly_photos/data/Stages.csv')
+            df = pd.read_csv('./butterfly_photos/data/stages count.csv')
             df
         # Plotting
         st.subheader("Butterfly Life Cycle")
