@@ -223,7 +223,7 @@ def display_butterfly():
     with st.expander("Data"):
         st.write("**Raw Data**")
         try:
-            df = pd.read_csv("https://github.com/winjher/bilabila/blob/master/Data/butterfly_data.csv")
+            df = pd.read_csv("Data/butterfly_data.csv")
             st.write(df)
         except FileNotFoundError:
             st.error("butterfly_data.csv not found at the specified path.")
