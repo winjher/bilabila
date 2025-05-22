@@ -1,3 +1,4 @@
+
 import os
 import keras
 from keras.models import load_model
@@ -63,6 +64,37 @@ if uploaded_file is not None:
 
 
     st.markdown(classify_images(uploaded_file))
+
+# import time
+# import streamlit as st
+
+
+# def main():
+#     if 'run_button' in st.session_state and st.session_state.run_button == True:
+#         st.session_state.running = True
+#     else:
+#         st.session_state.running = False
+
+#     if st.button('Dashboard', disabled=st.session_state.running, key='run_button'):
+#         status = st.progress(0)
+#         for t in range(10):
+#             time.sleep(.2)
+#             status.progress(10*t+10)
+#         st.session_state.output = 'Butterfly Output'
+#         st.query_params(page='dashboard')  # Set the page query parameter
+#         st.experimental_rerun()  # Rerun the app
+
+#     if 'output' in st.session_state:
+#         st.write(st.session_state.output)
+
+#     # Check for page query parameter and redirect
+#     query_params = st.experimental_get_query_params()
+#     if 'page' in query_params and query_params['page'][0] == 'home':
+#         st.write("You have been redirected to the Dashboard page!")
+#         # Add code for Home page here
+
+# if __name__ == "__main__":
+#     main()
 
 # import time
 # import streamlit as st
