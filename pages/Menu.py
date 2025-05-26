@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
 
 # Define the navigation menu items
 MENU_ITEMS = [
@@ -11,28 +12,9 @@ MENU_ITEMS = [
     "Larval Diseases",
     "Pupae Defects",
     "Butterfly Life Cycle",
-    "Breeders",
-    "Breeders Income",
     "Butterfly",
-    "Butterfly Data",
-    "Care Management",
-    "Classification",
-    "Classifier",
-    "Classify Diseases",
-    "CNN Classifier",
-    "Countdown",
-    "Defects",
-    "Diseases",
-    "Example",
-    "Hostplants",
-    "Larval Disease",
-    "Life Stages",
-    "Menu",
-    "OpenCV",
-    "Purchasers",
-    "Stages",
     "Tasks",
-    "Transfer Learning",
+
 ]
 
 # Define functions to display content for each section
@@ -223,7 +205,7 @@ def display_butterfly():
     with st.expander("Data"):
         st.write("**Raw Data**")
         try:
-            df = pd.read_csv("Data/butterfly_data.csv")
+            df = pd.read_csv("./data/butterfly_data.csv")
             st.write(df)
         except FileNotFoundError:
             st.error("butterfly_data.csv not found at the specified path.")
@@ -251,7 +233,7 @@ def display_butterfly_life_cycle():
     with st.expander("Data"):
         st.write("**Raw Data**")
         try:
-            df = pd.read_csv("./data/Stages.csv")
+            df = pd.read_csv("./Data/Stages.csv")
             st.write(df)
         except FileNotFoundError:
             st.error("Stages.csv not found at the specified path.")
@@ -265,39 +247,40 @@ def display_butterfly_life_cycle():
 
     st.write(df_stages)
 
-
 # Define a CSV file name to store the tasks data
 csv_file = "./data/tasks.csv"
-care_csv_file = "./data/care_data.csv"  # Define CSV for care data
+care_csv_file = "./data/care_data.csv"
+
+# Ensure the 'data' directory exists
+if not os.path.exists('data'):
+    os.makedirs('data')
+
+# Load existing tasks and care data from CSVs if they exist
+# This needs to be done once when the script starts
+@st.cache_data(show_spinner=False)
+def load_data(file_path):
+    if os.path.exists(file_path):
+        try:
+            return pd.read_csv(file_path).to_dict(orient='records')
+        except pd.errors.EmptyDataError:
+            return []
+    return []
+
+if "tasks" not in st.session_state:
+    st.session_state.tasks = load_data(csv_file)
+if "care_data" not in st.session_state:
+    st.session_state.care_data = load_data(care_csv_file)
 
 
 def display_task():
-    # Initialize session state for tasks and care data if not already initialized
-    if "tasks" not in st.session_state:
-        st.session_state.tasks = []
-    if "care_data" not in st.session_state:
-        st.session_state.care_data = []
-
     # Define the list of butterfly species
     species_list = [
-        "Butterfly-Clippers",
-        "Butterfly-Common Jay",
-        "Butterfly-Common Lime",
-        "Butterfly-Common Mime",
-        "Butterfly-Common Mormon",
-        "Butterfly-Emerald Swallowtail",
-        "Butterfly-Golden Birdwing",
-        "Butterfly-Gray Glassy Tiger",
-        "Butterfly-Great Eggfly",
-        "Butterfly-Great Yellow Mormon",
-        "Butterfly-Paper Kite",
-        "Butterfly-Pink Rose",
-        "Butterfly-Plain Tiger",
-        "Butterfly-Red Lacewing",
-        "Butterfly-Scarlet Mormon",
-        "Butterfly-Tailed Jay",
-        "Moth-Atlas",
-        "Moth-Giant Silk",
+        "Butterfly-Clippers", "Butterfly-Common Jay", "Butterfly-Common Lime",
+        "Butterfly-Common Mime", "Butterfly-Common Mormon", "Butterfly-Emerald Swallowtail",
+        "Butterfly-Golden Birdwing", "Butterfly-Gray Glassy Tiger", "Butterfly-Great Eggfly",
+        "Butterfly-Great Yellow Mormon", "Butterfly-Paper Kite", "Butterfly-Pink Rose",
+        "Butterfly-Plain Tiger", "Butterfly-Red Lacewing", "Butterfly-Scarlet Mormon",
+        "Butterfly-Tailed Jay", "Moth-Atlas", "Moth-Giant Silk",
     ]
     # --- Sidebar Menu ---
     st.sidebar.title("Task Management")
@@ -314,25 +297,27 @@ def display_task():
 
     # --- Main Content Area ---
     if menu_selection == "Register Task":
-        # Task Registration Form
         st.title("Task Registration")
 
         # Input fields for task registration
-        day = st.date_input("Select the Day")
-        hour = st.time_input("Select the Hour")
-        activity = st.selectbox(
-            "Choose Activity Type",
-            [
-                "Harvesting Pupae and Eggs",
-                "Feeding Larvae",
-                "Butterfly Foraging",
-            ],
-        )
-        details = st.text_input("Additional Details")
-        species = st.selectbox("Select Species", species_list)
+        # Using st.form for batching inputs and better UX
+        with st.form("task_registration_form"):
+            day = st.date_input("Select the Day")
+            hour = st.time_input("Select the Hour")
+            activity = st.selectbox(
+                "Choose Activity Type",
+                [
+                    "Harvesting Pupae and Eggs",
+                    "Feeding Larvae",
+                    "Butterfly Foraging",
+                ],
+            )
+            details = st.text_input("Additional Details")
+            species = st.selectbox("Select Species", species_list)
 
-        # Button for adding a task
-        if st.button("Add Task"):
+            submitted_task = st.form_submit_button("Add Task")
+
+        if submitted_task:
             new_task = {
                 "Day": str(day),
                 "Hour": str(hour),
@@ -340,34 +325,28 @@ def display_task():
                 "Details": details,
                 "Species": species,
             }
-            # Append the new task to our session state
             st.session_state.tasks.append(new_task)
-            # Save the updated tasks list to CSV
             try:
                 df = pd.DataFrame(st.session_state.tasks)
                 df.to_csv(csv_file, index=False)
                 st.success(f"Task added and saved to {csv_file}: {new_task}")
             except Exception as e:
                 st.error(f"Error saving task to CSV: {e}. Task added to session, but not saved.")
-                st.session_state.tasks.append(new_task)  # Ensure task is added even if CSV save fails
 
     elif menu_selection == "View Tasks":
-        # Display Tasks
         st.title("View Tasks")
         if st.session_state.tasks:
             df_tasks = pd.DataFrame(st.session_state.tasks)
-            st.dataframe(df_tasks)  # Display as a DataFrame
+            st.dataframe(df_tasks)
         else:
             st.info("No tasks registered yet.")
 
     elif menu_selection == "View Task Distribution":
-        # Display the registered tasks as a table and plot
         st.title("Task Distribution")
         if st.session_state.tasks:
             df = pd.DataFrame(st.session_state.tasks)
             st.dataframe(df)
 
-            # Plotting the distribution of tasks by activity as a bar chart
             st.subheader("Task Activity Distribution")
             try:
                 fig, ax = plt.subplots()
@@ -377,13 +356,14 @@ def display_task():
                 ax.set_ylabel("Count")
                 st.pyplot(fig)
 
-                # Plotting the distribution of tasks by species as a bar chart
                 st.subheader("Task Species Distribution")
                 fig_species, ax_species = plt.subplots()
                 df["Species"].value_counts().plot(kind='bar', ax=ax_species)
                 ax_species.set_title("Tasks Distribution by Species")
                 ax_species.set_xlabel("Species")
                 ax_species.set_ylabel("Count")
+                plt.xticks(rotation=45, ha="right") # Ensure labels are readable
+                plt.tight_layout() # Adjust layout
                 st.pyplot(fig_species)
 
             except Exception as e:
@@ -392,15 +372,16 @@ def display_task():
             st.info("No tasks registered yet.")
 
     elif menu_selection == "Record Care Activity":
-        # Record Care Activity
         st.title("Record Care Activity")
+        with st.form("care_activity_form"):
+            care_day = st.date_input("Select Care Day")
+            care_hour = st.time_input("Select Care Hour")
+            care_species = st.selectbox("Select Species", species_list)
+            care_activity = st.text_area("Care Activity Description", height=100) # Changed to text_area for longer descriptions
 
-        care_day = st.date_input("Select Care Day")
-        care_hour = st.time_input("Select Care Hour")
-        care_species = st.selectbox("Select Species", species_list)
-        care_activity = st.text_input("Care Activity Description")
+            submitted_care = st.form_submit_button("Record Care")
 
-        if st.button("Record Care"):
+        if submitted_care:
             new_care_data = {
                 "Day": str(care_day),
                 "Hour": str(care_hour),
@@ -409,16 +390,14 @@ def display_task():
             }
             st.session_state.care_data.append(new_care_data)
             st.success(f"Care activity recorded: {new_care_data}")
-            # save care data
             try:
                 df_care = pd.DataFrame(st.session_state.care_data)
                 df_care.to_csv(care_csv_file, index=False)
-                st.success(f"Care activity saved to {care_csv_file}")  # Add success message for saving
+                st.success(f"Care activity saved to {care_csv_file}")
             except Exception as e:
                 st.error(f"Error saving care data to CSV: {e}")
 
     elif menu_selection == "View Care Activities":
-        # View Care Activities
         st.title("View Care Activities")
         if st.session_state.care_data:
             df_care = pd.DataFrame(st.session_state.care_data)
@@ -436,8 +415,7 @@ MENU_FUNCTIONS = {
     "Pupae Defects": display_pupae_defects,
     "Butterfly": display_butterfly,
     "Butterfly Life Cycle": display_butterfly_life_cycle,
-    "Task Management": display_task,
-    # Add other menu items and their corresponding functions here
+    "Tasks": display_task, # <--- Changed this key to "Tasks"
 }
 
 # Create the sidebar menu
