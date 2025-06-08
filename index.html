@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="css/ss-style.css"> -->
+    <title>Butterfly Apps</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/03-feedback.css">
+    <style>
+        .main-hero-image {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('icon/bgbutterfly.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            width: 100%;
+            height: 500px;
+        }
+
+        .main-hero {
+            padding-top: 20px;
+        }
+
+        .card-app-team-item {
+            width: 200px;
+            border: 1px solid;
+            border-color: orange;
+            /* background-color: #ffc; */
+            border-radius: 15px;
+            margin: 10px 10px 10px 10px;
+            background-color: #fff;
+            margin-left: auto;
+            margin-right: auto;
+            color: #212222;
+            /* text-align: center;
+                justify-content: space-evenly; */
+        }
+
+        .img-team {
+            margin-top: 2px;
+            margin-bottom: 0rem;
+            font-weight: 500;
+            line-height: 1.2;
+            width: 145px;
+            height: 145px;
+            border-radius: 12px 12px 0px 0px;
+        }
+
+        .modal-body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 68vh;
+            background-color: #f5f5f5;
+            padding-bottom: 12px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-dialog {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+
+            width: 18px;
+            top: 2px;
+            right: -18px;
+            cursor: pointer;
+
+        }
+
+        .user-close {
+            background-color: #ddd;
+            border-radius: 50%;
+        }
+
+        .modal-header {
+            margin-bottom: 4px;
+        }
+
+        .modal-title {
+            padding-bottom: 4px;
+        }
+
+        .user-contacts {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .user-icons {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            margin-left: 4px;
+            top: 2rem;
+            position: relative;
+        }
+
+        .user-info {
+            top: 2rem;
+            position: relative;
+        }
+
+        .user-comment {
+            top: 1rem;
+            position: relative;
+        }
+
+        .user-input-field,
+        .user-info-comments {
+            width: 100%;
+            margin-bottom: 1px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .btn-send {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 125px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 4px;
+            cursor: pointer;
+
+        }
+
+        .btn-send:hover {
+            background-color: #0056b3;
+        }
+
+        .info-terms {
+            margin-bottom: 10px;
+        }
+
+        /* Mobile Devices */
+        @media only screen and (max-width: 600px) {
+            .card-app-team-item {
+                width: 160px;
+                border: 1px solid;
+                border-color: orange;
+                border-radius: 15px;
+                /* margin: 5px 5px 5px 5px; */
+                background-color: #fff;
+                margin-left: auto;
+                margin-right: auto;
+                color: #212222;
+                text-align: center;
+            }
+
+            .img-team {
+                margin-top: 2px;
+                margin-bottom: 0rem;
+                line-height: 1.2;
+                width: 120px;
+                height: 120px;
+                border-radius: 12px 12px 0px 0px;
+            }
+
+            .our-team-name {
+                font-size: small;
+            }
+
+            .ourteam-work {
+                font-size: smaller;
+            }
+
+            .footer-link {
+                width: 22px;
+                height: 22px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: var(--color-iris);
+                border-radius: 50px 50px;
+                font-size: 10px;
+            }
+
+            .footer-link,
+            i {
+                font-size: 14px;
+            }
+
+            .modal-body {
+                font-family: Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 68vh;
+                background-color: #f5f5f5;
+                /* padding-bottom: 28px; */
+
+            }
+
+            .service-hero-title {
+                font-size: 46px;
+                font-weight: 700;
+                line-height: 60px;
+                letter-spacing: 0.02em;
+                color: var(--color-white);
+                width: 320px;
+                margin-left: auto;
+                margin-right: auto;
+                padding-top: 100px;
+                text-align: center;
+                /* padding-top: 30em; */
+            }
+
+            .modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+                margin-left: auto;
+                margin-right: auto;
+                padding-top: 46px;
+            }
+
+            .img-banner {
+                height: 10vmin;
+                width: fit-content;
+                aspect-ratio: 1;
+                cursor: pointer;
+                transition: .5s;
+                /* mix-blend-mode: multiply; */
+            }
+
+            .modal-content {
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(65, 55, 55, 0.1);
+                position: relative;
+            }
+
+            .user-input-field,
+            .user-info-comments {
+                width: 100%;
+                margin: 1px;
+                font-size: smaller;
+            }
+
+            .user-icons {
+                width: 18px;
+                height: 18px;
+                flex-shrink: 0;
+                margin-left: 24px;
+                top: 2rem;
+                position: relative;
+            }
+
+            .user-info {
+                font-size: smaller;
+                position: relative;
+            }
+
+            .btn-send {
+                background-color: #007bff;
+                color: white;
+                border: none;
+                width: 125px;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 10px;
+                border-radius: 4px;
+                cursor: pointer;
+
+            }
+
+            .btn-send:hover {
+                background-color: #0056b3;
+            }
+
+            .user-input-field,
+            .user-info-comments {
+                width: 100%;
+                margin-bottom: 0px;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: smaller;
+            }
+
+            .info-terms,
+            .modal-title,
+            .user-comment,
+            .message,
+            .user-checkox-icon,
+            .user-icons {
+                font-size: smaller;
+            }
+
+            .user-icons {
+                width: 18px;
+                height: 18px;
+                flex-shrink: 0;
+                margin-left: 4px;
+                top: 2rem;
+                position: relative;
+            }
+
+            .bg-dark {
+                background-color: #212529 !important;
+            }
+
+            .text-white {
+                color: #fff !important;
+            }
+
+            .py-3 {
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+            }
+
+        }
+
+        /* Tablets */
+        /* @media only screen and (min-width: 601px) and (max-width: 768px) {
+            .modal-dialog {
+                margin: 15px;
+            }
+        } */
+
+        /* Small Laptops */
+        /* @media only screen and (min-width: 769px) and (max-width: 1024px) {
+            .modal-dialog {
+                margin: 20px;
+            }
+        }
+
+        /* Large Screens */
+        /* @media only screen and (min-width: 1025px) {
+            .modal-dialog {
+                margin: 20px;
+            }
+        } */
+        */
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand">
+                    <img src="icon/BB.png">
+                </a>
+                <a class="navbar-brand" href="weather.html"><img src="icon/weather.png"></a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link menu-apps-home " href="home.html">
+                                <i class="fas fa-home"></i><span> Home</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-apps-home" href="about.html">
+                                <i class="fa fa-info-circle" aria-hidden="true"></i><span>
+                                    About</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-apps-home" href="setting.html">
+                                <i class="fas fa-cog" aria-hidden="true"></i>
+                                <span>
+                                    Setting
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-apps-home" href="logout.html">
+                                <i class='fas fa-sign-out-alt' style='font-size:10px'></i>
+                                <span>Log out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="main-hero">
+            <div class="container main-hero-image">
+                <div class="imgbck">
+                    <h1 class="service-hero-title text-center">Effective Solutions for Your Butterfly Business</h1>
+                    <div class="col-xl-12 text-center btn-service">
+                        <button type="button" class="service-button-cta" data-modal-open>
+                            <a class="explore" id="openModal">Explore</a>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section><br>
+        <section class="container">
+            <div id="intro-section" class="row card-banner">
+                <div class="col-xl-3 text-center p-index">
+                    <div class="banner" onclick="bounceBanner()">
+                        <img src="icon/icon-1.webp" class="img-banner" alt="purpose">
+                    </div>
+                    <div class="card-app-banner">
+                        <h2 class="title-banner">Purpose</h2>
+                        <p class="p-index">To address these challenges, the complex, multivariate and unpredictable
+                            agricultural ecosystems
+                            need
+                            to be better understood by monitoring, measuring and analyzing continuously various physical
+                            aspects
+                            and phenomena.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 text-center p-index">
+                    <div class="banner" onclick="bounceBanner()">
+                        <img src="icon/quality.png" class="img-banner" alt="quality">
+                    </div>
+                    <div class="card-app-banner">
+                        <h2 class="title-banner">Quality</h2>
+                        <p class="p-index">As a farmer its task is to culture butterflies with extra care management by
+                            maintaining the
+                            indicator host plant for sustainability needs in butterfly farming or propagation.</p>
+                    </div>
+                </div>
+                <div class="col-xl-3 text-center p-index">
+                    <div class="banner" onclick="bounceBanner()">
+                        <img src="icon/dtask.png" class="img-banner" alt="function">
+                    </div>
+                    <div class="card-app-banner">
+                        <h2 class="title-banner">Function</h2>
+                        <p class="p-index">In order to have knowledge about the lepidoptera, the cultured species
+                            are
+                            examined sequentially
+                            and
+                            adaptively identified by the researcher. The system should decide on the precise
+                            tasks,and
+                            predicting model such as segmenting images, detecting objects in images, or classifying
+                            images.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-xl-3 text-center p-index">
+                    <div class="banner" onclick="bounceBanner()">
+                        <img src="icon/jewels.png" class="img-banner" alt="elegant">
+                    </div>
+                    <div class="card-app-banner">
+                        <h2 class="title-banner">Elegant</h2>
+                        <p class="p-index">With the ability to adapt and learn from new data, machine learning
+                            models
+                            can refine their
+                            breeding
+                            strategies and improve quality performance, helping breeders stay ahead in an
+                            ever-evolving
+                            and
+                            dynamic biodiversity. As markets become more data-driven and sophisticated, the
+                            integration
+                            of
+                            machine learning in breeding is no longer a luxury but a necessity for those seeking a
+                            competitive
+                            edge.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container card">
+            <h2 class="our-team-title">Our Team</h2>
+            <div id="intro-section" class="row">
+                <div class="col-xl-3 text-center card-app-team-item">
+                    <br>
+                    <img src="./images/profileimage.jpg" alt="Mark Guerrero" class=" img-team">
+                    <h3 class="our-team-name">Jerwin Montellano</h3>
+                    <p class="ourteam-work">Full Stack Developer</p>
+                    <ul class="social-media-list stages-icon-list">
+                        <li class="social-media-link">
+                            <a class="footer-link" href="www.facebook.com">
+                                <i class='fab fa-facebook-f' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-twitter' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-instagram' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-linkedin-in' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xl-3 text-center card-app-team-item">
+                    <br>
+                    <img src="./images/img1.jpg" alt="Mark Guerrero" class=" img-team">
+                    <h3 class="our-team-name">Mark Guerrero</h3>
+                    <p class="ourteam-work">Product Designer</p>
+                    <ul class="social-media-list stages-icon-list">
+                        <li class="social-media-link">
+                            <a class="footer-link" href="www.facebook.com">
+                                <i class='fab fa-facebook-f' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-twitter' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-instagram' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-linkedin-in' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xl-3 text-center card-app-team-item">
+                    <br>
+                    <img src="./images/img2.jpg" alt="Tom Ford" class=" img-team">
+                    <h3 class="our-team-name">Tom Ford</h3>
+                    <p class="ourteam-work">Fronted Designer</p>
+                    <ul class="social-media-list stages-icon-list">
+                        <li class="social-media-link">
+                            <a class="footer-link" href="www.facebook.com">
+                                <i class='fab fa-facebook-f' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-twitter' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-instagram' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-linkedin-in' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xl-3 text-center card-app-team-item">
+                    <br>
+                    <img src="./images/img3.jpg" alt="Camila Garcia" class=" img-team">
+                    <h3 class="our-team-name">Camila Garcia</h3>
+                    <p class="ourteam-work">Marketing</p>
+                    <ul class="social-media-list stages-icon-list">
+                        <li class="social-media-link">
+                            <a class="footer-link" href="www.facebook.com">
+                                <i class='fab fa-facebook-f' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-twitter' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-instagram' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-linkedin-in' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xl-3 text-center card-app-team-item">
+                    <br>
+                    <img src="./images/img4.jpg" alt="Daniel Wilson" class=" img-team">
+                    <h3 class="our-team-name">Daniel Wilson</h3>
+                    <p class="ourteam-work">UI Designer</p>
+                    <ul class="social-media-list stages-icon-list">
+                        <li class="social-media-link">
+                            <a class="footer-link" href="www.facebook.com">
+                                <i class='fab fa-facebook-f' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-twitter' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-instagram' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                        <li class="social-media-link">
+                            <a class="footer-link" href="#">
+                                <i class='fab fa-linkedin-in' style='font-size:14px'></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section>
+            <!-- Footer-->
+            <div class="py-5 bg-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 mb-4 mb-lg-0">
+                            <h5>Butterfly Apps</h5>
+                            <ul class="links list-unstyled">
+                                <li> <a href="pages/larval_disease.py" class="text-apps">Disease</a></li>
+                                <li> <a href="addDefectsPupae.html" class="text-apps">Defects</a></li>
+                                <li> <a href="classify.html" class="text-apps">Classify</a></li>
+
+                            </ul>
+                            <h5>Upload</h5>
+                            <ul class="links list-unstyled">
+
+                                <li> <a href="pageUpload.html" class="text-apps">Upload Image</a></li>
+                                <li> <a href="pageDisplay.html" class="text-apps">Display Image</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <h5>Life Stages</h5>
+                            <ul class="links list-unstyled">
+                                <li> <a href="predictLabel.html" class="text-apps">Butterfly</a></li>
+                                <li> <a href="PupaeAnalysis.html" class="text-apps">Pupae</a></li>
+                                <li> <a href="uploader.html" class="text-apps">Larvae</a></li>
+                                <li> <a href="addEggsDefects.html" class="ttext-apps">Eggs</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <h5>Management</h5>
+                            <ul class="links list-unstyled">
+                                <li> <a href="cageManagement.html" class="text-apps">Cage Management</a></li>
+                                <li> <a href="cageCountdownNotification.html" class="text-apps">Sugar Syrup
+                                        Notification</a></li>
+                                <li> <a href="care_management.html" class="text-apps">Butterfly Management </a></li>
+                                <li> <a href="activity.html" class="text-apps">Activity </a></li>
+
+                            </ul>
+                            <h5>Contacts</h5>
+                            <ul class="contact-info list-unstyled">
+                                <li><a href="#" class="text-apps">insectsconnection@gmail.com</a></li>
+                                <li><a href="#" class="text-apps">+00 000 00 000</a></li>
+                            </ul>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="py-3 bg-dark text-white">
+                <div class="col-lg-12 text-center">
+                    <p>All Rights Reserved &copy; 2024
+                        Insects Connection Corp.
+                    </p>
+                </div>
+        </div>
+    </footer>
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade is-hidden" data-modal id="Modal" tabindex="-1" aria-labelledby="ModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-close" id="img-close" data-modal-close>
+                    <img src="images/icons/close.svg" alt="close" class="user-close">
+                </div>
+                <div class="modal-header">
+                    <h3 class="modal-title" id="ModalLabel">
+                        Leave your information and we'll call you back.
+                    </h3>
+                </div>
+                <br>
+
+                <div class="modal-body">
+                    <form class="user-contacts" action="post" method="get" accept-charset="utf-8">
+                        <label for="name" class="user-info">Name</label>
+                        <img src="images/icons/user.svg" alt="" class="user-icons">
+                        <input type="text" class="user-input-field" required="" id="username">
+                        <label for="phone" class="user-info">Telephone</label>
+                        <img src="images/icons/telephone.svg" alt="" class="user-icons">
+                        <input type="number" class="user-input-field" required="" id="telephone">
+                        <label for="email" class="user-info">Email</label>
+                        <img src="images/icons/email.svg" alt="" class="user-icons">
+                        <input type="email" class="user-input-field" required="" id="email">
+                        <label for="username" class="user-comment">Comment</label>
+
+                        <textarea name="comments" id="comments" rows="2" cols="37" class="user-info-comments">
+                            </textarea>
+                        <br>
+                        <span>
+                            <p class="info-terms"><input type="checkbox" id="confirm" class="user-checkox-icon" /> I
+                                agree with the newsletter and the Terms and
+                                Conditions</p>
+                        </span>
+                        <button type="button" class="btn-send" onclick="send()">Send</button>
+                        <div id="message" class="message"></div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        function send() {
+            if (validateForm()) {
+                saveToLocalStorage();
+                alert("Form submitted and data saved!");
+                window.location.href = 'home.html';
+            }
+        }
+
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var telephone = document.getElementById("telephone").value;
+            var email = document.getElementById("email").value;
+            var comments = document.getElementById("comments").value;
+            var confirm = document.getElementById("confirm").checked;
+
+            if (username == "" || telephone == "" || email == "" || !confirm) {
+                alert("All fields must be filled out and terms must be agreed to.");
+                return false;
+            }
+
+            if (!validateEmail(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateEmail(email) {
+            var re = /^[^\s@]+@[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function saveToLocalStorage() {
+            var username = document.getElementById("username").value;
+            var telephone = document.getElementById("telephone").value;
+            var email = document.getElementById("email").value;
+            var comments = document.getElementById("comments").value;
+
+            var userData = {
+                username: username,
+                telephone: telephone,
+                email: email,
+                comments: comments
+            };
+
+            localStorage.setItem('userData', JSON.stringify(userData));
+        }
+
+    </script>
+
+    <script>
+        function bounceBanner() {
+            const banner = document.querySelector('.banner');
+            banner.style.animation = 'bounce 2s';
+            banner.addEventListener('animationend', () => {
+                banner.style.animation = '';
+            }, { once: true });
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const openModalButton = document.getElementById('openModal');
+            const modal = document.getElementById('Modal');
+            const closeModalButton = document.getElementById('img-close');
+
+            openModalButton.addEventListener('click', () => {
+                modal.classList.add('show');
+                modal.classList.remove('is-hidden');
+            });
+
+            closeModalButton.addEventListener('click', () => {
+                modal.classList.remove('show');
+                modal.classList.add('is-hidden');
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.classList.remove('show');
+                    modal.classList.add('is-hidden');
+                }
+            });
+
+            // Hide icons when typing
+            const inputFields = document.querySelectorAll('.user-input-field');
+            inputFields.forEach(field => {
+                field.addEventListener('focus', () => {
+                    const icon = field.previousElementSibling;
+                    if (icon && icon.classList.contains('user-icons')) {
+                        icon.style.visibility = 'hidden';
+                    }
+                });
+
+                field.addEventListener('blur', () => {
+                    const icon = field.previousElementSibling;
+                    if (icon && icon.classList.contains('user-icons')) {
+                        icon.style.visibility = 'none';
+                    }
+                });
+            });
+        });
+
+        document.getElementById('contactForm').add
+
+    </script>
+    <script src="./jquery-3.6.0.slim.min.js"> </script>
+    <script src="./js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
