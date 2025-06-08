@@ -501,8 +501,8 @@ def display_butterfly_data():
     plt.tight_layout()
     st.pyplot(fig)
 
-    st.dataframe(df_butterfly_display)
-
+    # st.dataframe(df_butterfly_display)
+    st.dataframe(df_butterfly_display_table)
     st.subheader("Species Score (Display Data Table)")
     fig, ax = plt.subplots(figsize=(10, 6))
     sns.barplot(x="species", y="score", data=df_butterfly_display_table, palette="viridis", ax=ax)
@@ -510,7 +510,7 @@ def display_butterfly_data():
     plt.tight_layout()
     st.pyplot(fig)
     
-    st.dataframe(df_butterfly_display_table)
+
 
 def display_butterfly_life_cycle_data():
     st.title("Butterfly Life Cycle Data")
