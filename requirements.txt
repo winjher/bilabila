@@ -187,7 +187,14 @@
 # wurlitzer==3.1.1
 # zipp==3.20.2
 streamlit
+keras
 tensorflow
 numpy
 pandas
-PIL
+altair
+plotly
+# If you use specific versions, add them:
+# tensorflow==2.10.0
+# keras==2.10.0
+# numpy==1.23.5
+# etc.
