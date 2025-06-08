@@ -1,10 +1,5 @@
 scikit-learn
 matplotlib
-# If you use specific versions, add them:
-# tensorflow==2.10.0
-# keras==2.10.0
-# numpy==1.23.5
-# etc.
 streamlit==1.33.0
 keras==2.10.0
 tensorflow==2.10.0 # Or whatever version works locally
