@@ -9,8 +9,8 @@ import pandas as pd
 from sklearn.metrics import confusion_matrix, classification_report
 
 # Set page configuration at the very beginning
-st.set_page_config(layout="wide", page_title="Butterfly App")
-
+# st.set_page_config(layout="wide", page_title="Butterfly App")
+#st.image('icon/bgbutterfly.jpg', width=200)
 # --- Function to set background image ---
 def set_background_image(image_url):
     """
@@ -51,6 +51,9 @@ DATA_DIR = './Data/' # Directory for your CSV data files
 UPLOAD_DIR = './upload/' # Directory for uploaded images
 butterfly_count = pd.read_csv("Data/butterfly_count.csv")
 butterfly_table = pd.read_csv("Data/butterfly_table_species.csv")
+butterfly_stages = pd.read_csv("Data/stages count.csv")
+butterfly_pupae = pd.read_csv("Data/pupae_defects_records.csv")
+butterfly_larval_disease = pd.read_csv("Data/larval_disease_records.csv")
 
 # Create directories if they don't exist
 os.makedirs(MODEL_DIR, exist_ok=True)
@@ -181,7 +184,7 @@ try:
         raise FileNotFoundError # Trigger fallback
     butterfly_species_names = _species_names
 except FileNotFoundError:
-    st.info("Using default butterfly species names. Ensure your `butterfly_photos/butterfly` directory is correctly structured for dynamic loading.")
+    #st.info("Using default butterfly species names. Ensure your `butterfly_photos/butterfly` directory is correctly structured for dynamic loading.")
     butterfly_species_names = [
         "Butterfly-Clippers", "Butterfly-Common Jay", "Butterfly-Common Lime",
         "Butterfly-Common Mime", "Butterfly-Common Mormon", "Butterfly-Emerald Swallowtail",
@@ -435,16 +438,16 @@ def display_contact():
 def display_larval_diseases_data():
     st.title("Larval Diseases Data")
     st.write("Learn about common diseases that affect butterfly larvae.")
-    larval_disease_names_data = ["Anaphylaxis Infection", "Gnathostomiasis", "Healthy","Nucleopolyhedrosis"]
-    number_of_cases = [120, 220, 500, 50]
-
+    # larval_disease_names_data = ["Anaphylaxis Infection", "Gnathostomiasis", "Healthy","Nucleopolyhedrosis"]
+    # number_of_cases = [120, 220, 500, 50]
+    
     st.subheader("Disease Cases")
-    df_diseases = pd.DataFrame({"Disease Name": larval_disease_names_data, "Number of Cases": number_of_cases})
-    st.dataframe(df_diseases)
+    #df_diseases = pd.DataFrame({"Disease Name": larval_disease_names_data, "Number of Cases": number_of_cases})
+    st.dataframe(butterfly_larval_disease)
 
     st.subheader("Disease Distribution")
     fig, ax = plt.subplots()
-    sns.barplot(x="Disease Name", y="Number of Cases", data=df_diseases, palette="viridis", ax=ax)
+    sns.barplot(x="disease_name", y="score", data=butterfly_larval_disease, palette="viridis", ax=ax)
     plt.xticks(rotation=45, ha="right")
     plt.tight_layout()
     st.pyplot(fig)
@@ -459,12 +462,12 @@ def display_pupae_defects_data():
     # df_defects = pd.DataFrame(
     #     {"Defect Type": pupae_defects_names_data, "Number of Defects/Healthy": number_of_defects}
     # )
-    df_defects=pd.read_csv("Data/defects_pupae.csv")
+    df_defects= butterfly_pupae
     st.dataframe(df_defects)
 
     st.subheader("Defect Distribution")
     fig, ax = plt.subplots()
-    sns.barplot(x="Defect Type", y="Number of Defects/Healthy", data=df_defects, palette="magma", ax=ax)
+    sns.barplot(x="defects_name", y="score", data=df_defects, palette="magma", ax=ax)
     plt.xticks(rotation=45, ha="right")
     plt.tight_layout()
     st.pyplot(fig)
@@ -479,7 +482,7 @@ def display_butterfly_data():
     # Using the loaded species_image_counts for consistency
     #total_number_of_images = [species_image_counts.get(s, 0) for s in species_of_butterfly]
 
-    st.image('icon/bgbutterfly.jpg', width=700)
+  
     st.subheader("Species Information")
     df_butterfly_display = butterfly_count
     df_butterfly_display_table = butterfly_table
@@ -501,8 +504,8 @@ def display_butterfly_data():
     plt.tight_layout()
     st.pyplot(fig)
 
-    # st.dataframe(df_butterfly_display)
-    st.dataframe(df_butterfly_display_table)
+    st.dataframe(df_butterfly_display)
+
     st.subheader("Species Score (Display Data Table)")
     fig, ax = plt.subplots(figsize=(10, 6))
     sns.barplot(x="species", y="score", data=df_butterfly_display_table, palette="viridis", ax=ax)
@@ -510,7 +513,7 @@ def display_butterfly_data():
     plt.tight_layout()
     st.pyplot(fig)
     
-
+    st.dataframe(df_butterfly_display_table)
 
 def display_butterfly_life_cycle_data():
     st.title("Butterfly Life Cycle Data")
@@ -527,8 +530,8 @@ def display_butterfly_life_cycle_data():
 
 
     st.subheader("Life Stages Overview")
-    df_stages_display = pd.DataFrame({"Stages Type": life_cycle_data, "Number of Stages": number_of_stages})
-
+    #df_stages_display = pd.DataFrame({"Stages Type": life_cycle_data, "Number of Stages": number_of_stages})
+    butterfly_stages
     with st.expander("Raw Data (from Stages.csv)"):
         try:
             df_raw_stages = pd.read_csv(CSV_FILE_STAGES_DATA)
@@ -541,12 +544,12 @@ def display_butterfly_life_cycle_data():
 
     st.subheader("Butterfly Life Cycle Distribution")
     fig, ax = plt.subplots(figsize=(8, 5))
-    sns.barplot(x="Stages Type", y="Number of Stages", data=df_stages_display, palette="viridis", ax=ax)
+    sns.barplot(x="Stage", y="Count", data=butterfly_stages, palette="viridis", ax=ax)
     plt.xticks(rotation=45, ha="right")
     plt.tight_layout()
     st.pyplot(fig)
 
-    st.dataframe(df_stages_display)
+    st.dataframe(butterfly_stages)
 
 # New function to display hostplants information
 def display_hostplants_info():
